@@ -22,7 +22,13 @@ func main() {
 	config.InitConfig(env)
 
 	router := gin.New()
+
+	// 初始化数据库
+	bootstrap.SetDB()
+
+	// 初始化路由绑定
 	bootstrap.SetRouter(router)
+
 	err := router.Run(":" + config.Get("app.port"))
 	if err != nil {
 		fmt.Println(err.Error())
